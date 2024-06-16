@@ -1,0 +1,25 @@
+/============== APP CODE =============/
+1. Build a complete app from subprograms
+APP : BUTTON CONTROL LIGHT SENSOR
+
+/============== APP INTERFACE LAYER ==============/
+***Call function from MIDDLE WARE and create separate program
+1. BTNToggleLED()
+- LED_Init() // active the led is chose by tool
+- BTN_Init() // active the BTN is chose by tool
+- SENSOR_Init() //  active the sensor is chose by tool
+- Toggle_LED(LED1)
+- Active_Handle_BTN(Handel_BTN())
+2. 
+
+/============== MIDDLE WARE ================/
+***Build function for app interface
+1. LED_Init()
+2. BTN_Init()
+....
+/============== HAL LAYER ==========/
+/============== DRIVERS ==============/
+*** Deploy necessary functions for each peripheral
+1. PORT :
+	- PORT_Init (PORT_Config_Type * PORT_Config);
+	- 
