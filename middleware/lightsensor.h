@@ -2,27 +2,24 @@
 #include "MKL46Z4.h"
 #include <stdint.h>
 //================ DEFINED ================/
-#ifndef __LED_H_
-#define __LED_H_
+#ifndef __LIGHTSENSOR_H_
+#define __LIGHTSENSOR_H_
 
 
 //------------- Enum -----------//
 //Define value of fields
-
 typedef enum{
-	LED1,
-	LED2
-}LED_Name_t;
+	Light_sns,
+}LIGHTSENSOR_Name_t;
+
 //------------- Struct -----------//
 
 //================ SUPPORT ================/
 
 //================ FOCUSED ================/
+void LIGHTSENSOR_Init(LIGHTSENSOR_Name_t name);
+void LIGHTSENSOR_TurnOn();
+void LIGHTSENSOR_TurnOff();
+void LIGHTSENSOR_Read_LUX();
 
-// Configuration control port
-void LED_Init(LED_Name_t name);
-void Toggle_LED(LED_Name_t name);
-void TurnOn_LED(LED_Name_t name);
-void TurnOff_LED(LED_Name_t name);
-void Flash_LED_Timer(LED_Name_t name, uint8_t times,uint16_t timeMs);
 #endif

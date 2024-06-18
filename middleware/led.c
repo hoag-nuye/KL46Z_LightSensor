@@ -4,6 +4,7 @@
 #include "port.h"
 #include "gpio.h"
 #include "clock.h"
+#include "systick.h"
 //================ DEFINED ================/
 //================ SUPPORT ================/
 //CONFIG LED PIN
@@ -111,5 +112,21 @@ void TurnOn_LED(LED_Name_t name){
 	case LED2:
 		Clear_PTE29_Pin();
 		break;
+	}
+};
+
+void Flash_LED_Timer(LED_Name_t name, uint8_t times,uint16_t timeMs){
+	SysTick_Config_Type sysTickConfig = {
+			.clkSrc = SysTick_Processor_Clk,
+	};
+	SysTick_Init(sysTickConfig);
+	SysTick_Reload(timeMs);
+	uint8_t idx;
+	for (idx = 0; idx <times*2; idx++){
+		SysTick_Enable();
+		while(SysTick_CountFlag() != Sys_Flag_Counted){}
+		Toggle_LED(name);
+		SysTick_ClearFlag();
+		SysTick_Disable();
 	}
 };
