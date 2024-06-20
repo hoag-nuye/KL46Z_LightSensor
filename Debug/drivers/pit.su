@@ -1,0 +1,6 @@
+../drivers/pit.c:7:17:GetBusClock	16	static
+../drivers/pit.c:19:17:timeToReload	24	static
+../drivers/pit.c:27:6:Pit_Config	16	static
+../drivers/pit.c:31:6:Pit_Timer_Reload	24	static
+../drivers/pit.c:36:6:Pit_Timer_Start	16	static
+../drivers/pit.c:40:6:Pit_Timer_Finish	16	static

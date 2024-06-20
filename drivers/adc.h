@@ -54,9 +54,15 @@ typedef enum{
 	SINGLE_END = 0b0,
 	DIFFERNTTIAL = 0b1,
 }ADC_DifMode_t;
+
+typedef enum{
+	ADC_SC1A = 0b0,
+	ADC_SC1B = 0b1,
+}ADC_SC1n_t;
 //------------- Struct -----------//
 typedef struct
 {
+	ADC_SC1n_t sc1Name;
 	ADC_Trigger_t trigger;
 	ADC_Interrupt_t interrupt;
 	ADC_SourceCLock_t srcClock;
@@ -72,6 +78,6 @@ typedef struct
 
 // Configuration control port
 void ADC_Config(ADC_Config_Type *ADC_Config);
-void ADC_Softwarwe_Start(ADC_Input_t input);
-uint16_t ADC_GetData16bit();
+void ADC_Softwarwe_Start(ADC_Input_t input, ADC_SC1n_t inputTrigger);
+uint16_t ADC_GetData16bit(ADC_SC1n_t sc1Name);
 #endif

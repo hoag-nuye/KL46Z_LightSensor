@@ -1,0 +1,5 @@
+../middleware/lightsensor.c:13:13:Config_PTE22_Pin	40	static
+../middleware/lightsensor.c:53:6:ADC0_IRQHandler	24	static
+../middleware/lightsensor.c:60:6:LIGHTSENSOR_Init	16	static
+../middleware/lightsensor.c:66:6:LIGHTSENSOR_TurnOn	8	static
+../middleware/lightsensor.c:70:6:LIGHTSENSOR_Read	16	static

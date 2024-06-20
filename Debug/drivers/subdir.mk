@@ -7,7 +7,9 @@ C_SRCS += \
 ../drivers/adc.c \
 ../drivers/clock.c \
 ../drivers/gpio.c \
+../drivers/mdl2mdl.c \
 ../drivers/nvic.c \
+../drivers/pit.c \
 ../drivers/port.c \
 ../drivers/systick.c 
 
@@ -15,7 +17,9 @@ C_DEPS += \
 ./drivers/adc.d \
 ./drivers/clock.d \
 ./drivers/gpio.d \
+./drivers/mdl2mdl.d \
 ./drivers/nvic.d \
+./drivers/pit.d \
 ./drivers/port.d \
 ./drivers/systick.d 
 
@@ -23,7 +27,9 @@ OBJS += \
 ./drivers/adc.o \
 ./drivers/clock.o \
 ./drivers/gpio.o \
+./drivers/mdl2mdl.o \
 ./drivers/nvic.o \
+./drivers/pit.o \
 ./drivers/port.o \
 ./drivers/systick.o 
 
@@ -40,7 +46,7 @@ drivers/%.o: ../drivers/%.c drivers/subdir.mk
 clean: clean-drivers
 
 clean-drivers:
-	-$(RM) ./drivers/adc.d ./drivers/adc.o ./drivers/clock.d ./drivers/clock.o ./drivers/gpio.d ./drivers/gpio.o ./drivers/nvic.d ./drivers/nvic.o ./drivers/port.d ./drivers/port.o ./drivers/systick.d ./drivers/systick.o
+	-$(RM) ./drivers/adc.d ./drivers/adc.o ./drivers/clock.d ./drivers/clock.o ./drivers/gpio.d ./drivers/gpio.o ./drivers/mdl2mdl.d ./drivers/mdl2mdl.o ./drivers/nvic.d ./drivers/nvic.o ./drivers/pit.d ./drivers/pit.o ./drivers/port.d ./drivers/port.o ./drivers/systick.d ./drivers/systick.o
 
 .PHONY: clean-drivers
 

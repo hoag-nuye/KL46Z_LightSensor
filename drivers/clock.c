@@ -26,5 +26,8 @@ void Clock_Enable(Perhipheral_Name_t name){
 	case CLK_ADC0:
 		SIM->SCGC6 |= SIM_SCGC6_ADC0(1);
 		break;
+	case CLK_PIT:
+		SIM->SCGC6 |= SIM_SCGC6_PIT(1);
+		break;
 	}
 };

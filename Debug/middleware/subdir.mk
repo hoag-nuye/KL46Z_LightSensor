@@ -5,15 +5,18 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../middleware/button.c \
-../middleware/led.c 
+../middleware/led.c \
+../middleware/lightsensor.c 
 
 C_DEPS += \
 ./middleware/button.d \
-./middleware/led.d 
+./middleware/led.d \
+./middleware/lightsensor.d 
 
 OBJS += \
 ./middleware/button.o \
-./middleware/led.o 
+./middleware/led.o \
+./middleware/lightsensor.o 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -28,7 +31,7 @@ middleware/%.o: ../middleware/%.c middleware/subdir.mk
 clean: clean-middleware
 
 clean-middleware:
-	-$(RM) ./middleware/button.d ./middleware/button.o ./middleware/led.d ./middleware/led.o
+	-$(RM) ./middleware/button.d ./middleware/button.o ./middleware/led.d ./middleware/led.o ./middleware/lightsensor.d ./middleware/lightsensor.o
 
 .PHONY: clean-middleware
 

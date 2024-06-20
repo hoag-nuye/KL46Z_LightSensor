@@ -22,5 +22,5 @@ typedef void (*Handle_Button_t)(BUTTON_Name_t);
 
 // Configuration control port
 void BUTTON_Init(BUTTON_Name_t name);
-void Read_BUTTON(Handle_Button_t handle_interrupt);
+void Read_BUTTON(Handle_Button_t handle_ButtonSwitch);
 #endif

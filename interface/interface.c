@@ -41,3 +41,7 @@ void BUTTON_LED_Toggle(){
 		}
 	}
 };
+
+void LIGHTSENSOR_ACTIVE_TEST(){
+
+};
