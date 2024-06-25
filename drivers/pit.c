@@ -25,7 +25,7 @@ static uint32_t timeToReload(uint16_t timeMs){
 }
 //================ FOCUSED ================/
 void Pit_Config(Pit_Config_Type* Pit_Config){
-	PIT->MCR &= PIT_MCR_MDIS_MASK;
+	PIT->MCR &= ~PIT_MCR_MDIS_MASK;
 	PIT->MCR |= PIT_MCR_MDIS(Pit_Config->module);
 };
 void Pit_Timer_Reload(Pit_Channel_t channel, uint16_t timeMs){
@@ -35,7 +35,7 @@ void Pit_Timer_Reload(Pit_Channel_t channel, uint16_t timeMs){
 };
 void Pit_Timer_Start(Pit_Channel_t channel){
 	PIT->CHANNEL[channel].TCTRL &= ~PIT_TCTRL_TEN_MASK;
-	PIT->CHANNEL[channel].TCTRL &= PIT_TCTRL_TEN(1U);
+	PIT->CHANNEL[channel].TCTRL |= PIT_TCTRL_TEN(1U);
 };
 void Pit_Timer_Finish(Pit_Channel_t channel){
 	PIT->CHANNEL[channel].TCTRL &= ~PIT_TCTRL_TEN_MASK;

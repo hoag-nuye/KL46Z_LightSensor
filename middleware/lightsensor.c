@@ -8,7 +8,8 @@
 #include "adc.h"
 #include "pit.h"
 //================ DEFINED ================/
-Handle_LightSensor_t handle_LightSensorValue;
+static void nullHandlLightSensor(uint32_t _){}
+Handle_LightSensor_t handle_LightSensorValue = nullHandlLightSensor;
 //================ SUPPORT ================/
 static void Config_PTE22_Pin(){
 	//Clock port E
@@ -64,6 +65,7 @@ void LIGHTSENSOR_Init(LIGHTSENSOR_Name_t name){
 		}
 };
 void LIGHTSENSOR_TurnOn(){
+	Pit_Timer_Reload(PIT_TIMER0, 10);
 	Pit_Timer_Start(PIT_TIMER0);
 };
 void LIGHTSENSOR_TurnOff();

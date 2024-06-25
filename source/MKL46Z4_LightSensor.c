@@ -21,5 +21,6 @@
  */
 
 void main() {
-	BUTTON_LED_Toggle();
+//	BUTTON_LED_Toggle();
+	LIGHTSENSOR_ACTIVE_TEST();
 }

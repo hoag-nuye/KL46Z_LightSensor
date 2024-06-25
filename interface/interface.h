@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include "led.h"
 #include "button.h"
-#include "systick.h"
+#include "lightsensor.h"
 //================ DEFINED ================/
 #ifndef __INTERFACE_H_
 #define __INTERFACE_H_
