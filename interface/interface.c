@@ -43,8 +43,11 @@ void BUTTON_LED_Toggle(){
 };
 
 void LIGHTSENSOR_ACTIVE_TEST(){
-	LIGHTSENSOR_Init(Light_sns);
-	LIGHTSENSOR_TurnOn();
+//	LIGHTSENSOR_Init(Light_sns);
+//	LIGHTSENSOR_TurnOn();
+
+	LED_Init(LED2_LighSNS);
+	TurnOn_LED(LED2_LighSNS);
 	while(1){
 
 		}

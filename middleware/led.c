@@ -5,6 +5,7 @@
 #include "gpio.h"
 #include "clock.h"
 #include "systick.h"
+#include "tpm.h"
 //================ DEFINED ================/
 //================ SUPPORT ================/
 //CONFIG LED PIN
@@ -44,6 +45,30 @@ static void Config_PTE29_Pin(){
 	GPIO_PinConfig(&gpioConfigE29);
 }
 
+//Configuration LED Pin with PWM
+static void Config_PTE29_PWM_Pin(){
+	//Configuration LED2 Pin
+	Clock_Enable(CLK_PORTE);
+	PORT_Config_Type portConfigE29 = {
+			.port = PORTE,
+			.pin = 29,
+			.mux = Alt3,
+	};
+	PORT_PinConfig(&portConfigE29);
+
+	//Configuration TPM
+	//TPM0_CH2
+	Clock_Enable(CLK_TPM0);
+	TPM_PWM_Config_t TPM0_PWM_Config = {
+			.tpm = TPM0,
+			.clockMode = TPM_CLOCK_MODULE,
+			.channel = 2,
+			.channelMode = TPM_EPWM_High_MODE,
+	};
+	TPM_PWM_Config(&TPM0_PWM_Config);
+
+}
+
 //TOGGLE LED
 static void Toggle_PTD5_Pin(){
 	GPIO_TogglePin(GPIOD, 5);
@@ -52,7 +77,7 @@ static void Toggle_PTE29_Pin(){
 	GPIO_TogglePin(GPIOE, 29);
 }
 
-//TURN ON LED
+//TURN OFF LED
 static void Set_PTD5_Pin(){
 	GPIO_SetPin(GPIOD, 5);
 }
@@ -60,12 +85,24 @@ static void Set_PTE29_Pin(){
 	GPIO_SetPin(GPIOE, 29);
 }
 
-//TURN OFF LED
+//TURN ON LED
 static void Clear_PTD5_Pin(){
 	GPIO_ClearPin(GPIOD, 5);
 }
 static void Clear_PTE29_Pin(){
 	GPIO_ClearPin(GPIOE, 29);
+}
+
+static void Enable_PTE29_LighSNS_Pin(){
+
+	//GET DATA from LIGH_SENSOR
+
+	//TRANSMIT DATA from LIGH_SENSOR to PWM
+	TPM_PWM_SetCOUNTCounter(TPM0, 2, 1);
+	TPM_PWM_SetMODValue(TPM0, 2, 60);//60HZ
+
+	//TPM0_CH2 enable
+	TPM_PWM_Enable(TPM0);
 }
 //================ FOCUSED ================/
 //LED Initial
@@ -76,6 +113,9 @@ void LED_Init(LED_Name_t name){
 		break;
 	case LED2:
 		Config_PTE29_Pin();
+		break;
+	case LED2_LighSNS:
+		Config_PTE29_PWM_Pin();
 		break;
 	}
 };
@@ -89,10 +129,12 @@ void Toggle_LED(LED_Name_t name){
 	case LED2:
 		Toggle_PTE29_Pin();
 		break;
+	case LED2_LighSNS:
+		break;
 	}
 };
 
-//Turn_on led
+//Turn_OF led
 void TurnOff_LED(LED_Name_t name){
 	switch (name){
 	case LED1:
@@ -100,9 +142,10 @@ void TurnOff_LED(LED_Name_t name){
 		break;
 	case LED2:
 		Set_PTE29_Pin();
+	case LED2_LighSNS:
 		break;
 	}
-//Turn_off led
+//Turn_ON led
 };
 void TurnOn_LED(LED_Name_t name){
 	switch (name){
@@ -111,6 +154,9 @@ void TurnOn_LED(LED_Name_t name){
 		break;
 	case LED2:
 		Clear_PTE29_Pin();
+		break;
+	case LED2_LighSNS:
+		Enable_PTE29_LighSNS_Pin();
 		break;
 	}
 };

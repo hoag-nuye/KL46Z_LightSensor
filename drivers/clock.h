@@ -16,7 +16,8 @@ typedef enum{
 	 CLK_PORTD,
 	 CLK_PORTE,
 	 CLK_ADC0,
-	 CLK_PIT
+	 CLK_PIT,
+	 CLK_TPM0,
 }Perhipheral_Name_t;
 //------------- Struct -----------//
 

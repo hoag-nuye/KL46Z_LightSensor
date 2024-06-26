@@ -1,20 +1,10 @@
 //================ INCLUDE ================/
 #include "pit.h"
 #include "MKL46Z4.h"
+#include "driverLib.h"
 //================ DEFINED ================/
 
 //================ SUPPORT ================/
-static uint32_t GetBusClock(void) {
-    // take clock of processor
-	SystemCoreClockUpdate();
-    uint32_t coreClock = SystemCoreClock;
-    uint32_t busClock;
-
-    // Bus clock = coreClock / OUTDIV4
-    busClock = coreClock / ((SIM->CLKDIV1 & SIM_CLKDIV1_OUTDIV4_MASK) >> SIM_CLKDIV1_OUTDIV4_SHIFT);
-
-    return busClock;
-}
 
 static uint32_t timeToReload(uint16_t timeMs){
 	uint32_t reloadValue;

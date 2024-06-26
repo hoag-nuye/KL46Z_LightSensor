@@ -11,7 +11,8 @@
 
 typedef enum{
 	LED1,
-	LED2
+	LED2,
+	LED2_LighSNS,
 }LED_Name_t;
 //------------- Struct -----------//
 
