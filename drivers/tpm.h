@@ -32,5 +32,5 @@ typedef struct{
 void TPM_PWM_Config(TPM_PWM_Config_t* tpmConfig);
 void TPM_PWM_Enable(TPM_Type* tpm);
 void TPM_PWM_SetMODValue(TPM_Type* tpm, uint8_t channel, uint16_t freqOfPeriod);
-void TPM_PWM_SetCOUNTCounter(TPM_Type* tpm, uint8_t channel, uint16_t freqOfDuty);
+void TPM_PWM_SetCOUNTERValue(TPM_Type* tpm, uint8_t channel, uint16_t freqOfDuty);
 #endif

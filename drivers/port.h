@@ -16,13 +16,13 @@ typedef enum{
 
 typedef enum{
 	 Analog = 0b000,
-	 GPIO   = 001,
-	 Alt2   = 010,
-	 Alt3   = 011,
-	 Alt4   = 100,
-	 Alt5   = 101,
-	 Alt6   = 110,
-	 Al7    = 111
+	 GPIO   = 0b001,
+	 Alt2   = 0b010,
+	 Alt3   = 0b011,
+	 Alt4   = 0b100,
+	 Alt5   = 0b101,
+	 Alt6   = 0b110,
+	 Al7    = 0b111
 }MuxControl_t;
 
 

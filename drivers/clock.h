@@ -5,7 +5,7 @@
 #ifndef __CLOCK_H_
 #define __CLOCK_H_
 
-
+#define CLK_TPM0 1000000U
 //------------- Enum -----------//
 //Define value of fields
 
@@ -17,7 +17,7 @@ typedef enum{
 	 CLK_PORTE,
 	 CLK_ADC0,
 	 CLK_PIT,
-	 CLK_TPM0,
+	 CLK_TPM0_MCGIRCLK,
 }Perhipheral_Name_t;
 //------------- Struct -----------//
 

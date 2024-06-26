@@ -58,7 +58,7 @@ static void Config_PTE29_PWM_Pin(){
 
 	//Configuration TPM
 	//TPM0_CH2
-	Clock_Enable(CLK_TPM0);
+	Clock_Enable(CLK_TPM0_MCGIRCLK);
 	TPM_PWM_Config_t TPM0_PWM_Config = {
 			.tpm = TPM0,
 			.clockMode = TPM_CLOCK_MODULE,
@@ -97,9 +97,12 @@ static void Enable_PTE29_LighSNS_Pin(){
 
 	//GET DATA from LIGH_SENSOR
 
+
+	//frequencies lower than 100 Hz may cause visible flicker.
+	TPM_PWM_SetMODValue(TPM0, 2, 10000);//1000HZ
 	//TRANSMIT DATA from LIGH_SENSOR to PWM
-	TPM_PWM_SetCOUNTCounter(TPM0, 2, 1);
-	TPM_PWM_SetMODValue(TPM0, 2, 60);//60HZ
+	TPM_PWM_SetCOUNTERValue(TPM0, 2, 150);//50%
+
 
 	//TPM0_CH2 enable
 	TPM_PWM_Enable(TPM0);

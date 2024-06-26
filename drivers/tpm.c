@@ -2,8 +2,11 @@
 #include "tpm.h"
 #include "MKL46Z4.h"
 #include "driverLib.h"
+#include "clock.h"
 //================ DEFINED ================/
 static TPM_ClockMode_t ClkMode = TPM_CLOCK_DISABLE;
+//Get Clock From IR Clock
+
 //================ SUPPORT ================/
 static void Channel_Mode_Config(TPM_Type* tpm, uint8_t channel,TPM_ChannelMode_t channelMode){
 	switch (channelMode){
@@ -12,26 +15,43 @@ static void Channel_Mode_Config(TPM_Type* tpm, uint8_t channel,TPM_ChannelMode_t
 		tpm->SC &= ~TPM_SC_CPWMS_MASK;
 		tpm->SC |= TPM_SC_CPWMS(0U);
 		//MSnB:MSnA = [1:0]
-		tpm->CONTROLS[channel].CnSC &= ~TPM_CnSC_MSB_MASK;
-		tpm->CONTROLS[channel].CnSC |= TPM_CnSC_MSB(1);
 
-		tpm->CONTROLS[channel].CnSC &= ~TPM_CnSC_MSA_MASK;
-		tpm->CONTROLS[channel].CnSC |= TPM_CnSC_MSA(0);
 		//ELSnB:ELSnA = [1:0]
-		tpm->CONTROLS[channel].CnSC &= ~TPM_CnSC_ELSB_MASK;
-		tpm->CONTROLS[channel].CnSC |= TPM_CnSC_ELSB(1);
+		// can't configuration this field at time here
+		// because When a channel is disabled,
+		// this bit will not change state
 
-		tpm->CONTROLS[channel].CnSC &= ~TPM_CnSC_ELSA_MASK;
-		tpm->CONTROLS[channel].CnSC |= TPM_CnSC_ELSA(0);
+		/* When switching mode, disable channel first  */
+		tpm->CONTROLS[channel].CnSC &=
+		~(TPM_CnSC_MSA_MASK | TPM_CnSC_MSB_MASK | TPM_CnSC_ELSA_MASK | TPM_CnSC_ELSB_MASK);
+
+		/* Wait till mode change to disable channel is acknowledged */
+		while ((tpm->CONTROLS[channel].CnSC &
+				(TPM_CnSC_MSA_MASK | TPM_CnSC_MSB_MASK | TPM_CnSC_ELSA_MASK | TPM_CnSC_ELSB_MASK)))
+		{
+		}
+
+		//SET UP MSnB:MSnA = [1:0] ; ELSnB:ELSnA = [1:0]
+		tpm->CONTROLS[channel].CnSC |=  TPM_CnSC_MSB_MASK | TPM_CnSC_ELSB_MASK;
+
+
+		/* Wait till mode change is acknowledged */
+		while (!(tpm->CONTROLS[channel].CnSC &
+				(TPM_CnSC_MSA_MASK | TPM_CnSC_MSB_MASK | TPM_CnSC_ELSA_MASK | TPM_CnSC_ELSB_MASK)))
+		{
+		}
+
 		break;
 	}
 }
 
+
 //================ FOCUSED ================/
 void TPM_PWM_Config(TPM_PWM_Config_t* tpmConfig){
 	ClkMode = tpmConfig->clockMode;
+
 	Channel_Mode_Config(tpmConfig->tpm,tpmConfig->channel, tpmConfig->channelMode);
-};
+	};
 void TPM_PWM_Enable(TPM_Type* tpm){
 	switch (ClkMode){
 	case TPM_CLOCK_DISABLE:
@@ -48,16 +68,17 @@ void TPM_PWM_Enable(TPM_Type* tpm){
 	}
 };
 void TPM_PWM_SetMODValue(TPM_Type* tpm, uint8_t channel, uint16_t freqOfPeriod){
-	//Calculate BUS clock
-	uint32_t Pit_clock = GetBusClock();
-	//Calculate modulo value by BUS clock and Period
-	tpm->MOD &= ~TPM_MOD_MOD_MASK;
-	tpm->MOD |= TPM_MOD_MOD((uint16_t)((uint32_t)freqOfPeriod/Pit_clock));
-};
-void TPM_PWM_SetCOUNTCounter(TPM_Type* tpm, uint8_t channel, uint16_t freqOfDuty){
-	//Calculate BUS clock
-	uint32_t Pit_clock = GetBusClock();
-	//Calculate count value by BUS clock and Duty Cycle
+	//Calculate IR CLOCK
+	uint32_t tpm_clock = CLK_TPM0;
+	//Reset Count value
 	tpm->CNT &= ~TPM_CNT_COUNT_MASK;
-	tpm->CNT |= TPM_CNT_COUNT((uint16_t)((uint32_t)freqOfDuty/Pit_clock));
+	//Calculate modulo value by BUS clock and Period
+	tpm->MOD = (tpm->MOD & (~TPM_MOD_MOD_MASK)) | TPM_MOD_MOD((uint16_t)(tpm_clock/(uint32_t)freqOfPeriod)-1);
+};
+void TPM_PWM_SetCOUNTERValue(TPM_Type* tpm, uint8_t channel, uint16_t ratioOfDuty){
+
+	//Calculate count value by BUS clock and ratio Of Duty Cycle with Period
+	uint16_t valCounter = (((uint16_t)tpm->MOD)+1)*ratioOfDuty/100;
+	tpm->CONTROLS[channel].CnV
+	= (tpm->CONTROLS[channel].CnV & (~TPM_CnV_VAL_MASK)) | TPM_CnV_VAL(valCounter-1);
 };
