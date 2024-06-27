@@ -31,8 +31,8 @@ static void Channel_Mode_Config(TPM_Type* tpm, uint8_t channel,TPM_ChannelMode_t
 		{
 		}
 
-		//SET UP MSnB:MSnA = [1:0] ; ELSnB:ELSnA = [0:1]
-		tpm->CONTROLS[channel].CnSC |=  TPM_CnSC_MSB_MASK | TPM_CnSC_ELSA_MASK;
+		//SET UP MSnB:MSnA = [1:0] ; ELSnB:ELSnA = [1:0]
+		tpm->CONTROLS[channel].CnSC |=  TPM_CnSC_MSB_MASK | TPM_CnSC_ELSB_MASK;
 
 
 		/* Wait till mode change is acknowledged */
@@ -52,6 +52,8 @@ void TPM_PWM_Config(TPM_PWM_Config_t* tpmConfig){
 
 	Channel_Mode_Config(tpmConfig->tpm,tpmConfig->channel, tpmConfig->channelMode);
 	};
+
+//TPM PWM ENABLE
 void TPM_PWM_Enable(TPM_Type* tpm){
 	switch (ClkMode){
 	case TPM_CLOCK_DISABLE:
@@ -67,6 +69,23 @@ void TPM_PWM_Enable(TPM_Type* tpm){
 		break;
 	}
 };
+
+//TPM PWM DISABLE
+void TPM_PWM_Disable(TPM_Type* tpm){
+	switch (ClkMode){
+	case TPM_CLOCK_DISABLE:
+		break;
+	case TPM_CLOCK_MODULE:
+		//CMOD = 01 and PS = 0 (divide 1)
+		//NOTE : PS can be written only when the counter is disabled
+		//=> Configuration PS before CMOD in CONFIG function
+		tpm->SC &= ~TPM_SC_CMOD_MASK;
+		break;
+	case TPM_CLOCK_EXTERNAL:
+		break;
+	}
+};
+
 void TPM_PWM_SetMODValue(TPM_Type* tpm, uint8_t channel, uint16_t freqOfPeriod){
 	//Calculate IR CLOCK
 	uint32_t tpm_clock = CLK_TPM0_IR;

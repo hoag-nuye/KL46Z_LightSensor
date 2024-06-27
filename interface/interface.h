@@ -12,21 +12,21 @@
 //------------- Enum -----------//
 //Define value of fields
 
-typedef enum{
-	DO_NOTHING,
-	TOGGLE_LED,
-	FLASHING_LED,
-}State_Machine_t;
 
 typedef enum{
-	_BUTTON_LED_Flashing,
-}State_Program_t;
+	MODE_START_UP,
+	MODE_BUTTON_LED,
+	MODE_LIGHTSENSOR_LED,
+	MODE_LIGHTSENSOR_USB_COMMS,
+}State_Mode_t;
+
 //------------- Struct -----------//
-
+extern State_Mode_t stateMode;
 //================ SUPPORT ================/
 
 //================ FOCUSED ================/
-void BUTTON_LED_Toggle();
-void LIGHTSENSOR_ACTIVE_TEST();
-void USB_COMMS();
+void APP_Init();
+void BUTTON_LED();
+void LIGHTSENSOR_LED();
+void LIGHTSENSOR_USB_COMMS();
 #endif

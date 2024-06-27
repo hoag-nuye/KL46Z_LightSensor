@@ -54,6 +54,11 @@ void UART0_TRANSMIT_Enable(){;
 	UART0->C2 &= ~UART0_C2_TE_MASK;
 	UART0->C2 |= UART_C2_TE(1U);
 };
+
+void UART0_TRANSMIT_Disable(){
+	UART0->C2 &= ~UART0_C2_TE_MASK;
+};
+
 void UART0_TRANSMIT_Data(char data){
 	//wait data buffer empty : S1[TDRE]
 	while(!((UART0->S1 & UART0_S1_TDRE_MASK)>>UART0_S1_TDRE_SHIFT)){}

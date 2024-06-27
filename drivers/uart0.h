@@ -18,6 +18,7 @@ typedef struct{
 //================ FOCUSED ================/
 void UART0_Config(UART0_Config_t* uart0_config);
 void UART0_TRANSMIT_Enable();
+void UART0_TRANSMIT_Disable();
 void UART0_TRANSMIT_Data(char data);
 // Configuration control port
 #endif

@@ -118,6 +118,13 @@ static void Enable_PTE29_LighSNS_Pin(){
 
 }
 
+//TURN OFF LED2 WITH TAKING DATA FROM LIGHSENSOR
+static void Disable_PTE29_LighSNS_Pin(){
+
+	TPM_PWM_Disable(TPM0);
+
+}
+
 //CONVERT
 //================ FOCUSED ================/
 //LED Initial
@@ -149,7 +156,7 @@ void Toggle_LED(LED_Name_t name){
 	}
 };
 
-//Turn_OF led
+//Turn_OFF LED
 void TurnOff_LED(LED_Name_t name){
 	switch (name){
 	case LED1:
@@ -158,9 +165,10 @@ void TurnOff_LED(LED_Name_t name){
 	case LED2:
 		Set_PTE29_Pin();
 	case LED2_LighSNS:
+		Disable_PTE29_LighSNS_Pin();
 		break;
 	}
-//Turn_ON led
+//Turn_ON LED
 };
 void TurnOn_LED(LED_Name_t name){
 	switch (name){

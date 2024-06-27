@@ -21,7 +21,24 @@
  */
 
 void main() {
-//	BUTTON_LED_Toggle();
-	LIGHTSENSOR_ACTIVE_TEST();
-//	USB_COMMS();
+	stateMode = MODE_START_UP;
+	APP_Init();
+	while(1){
+		switch (stateMode){
+		case MODE_START_UP:
+			App_Sleep();
+			break;
+		case MODE_BUTTON_LED:
+			BUTTON_LED();
+			break;
+		case MODE_LIGHTSENSOR_LED:
+			LIGHTSENSOR_LED();
+			break;
+		case MODE_LIGHTSENSOR_USB_COMMS:
+			LIGHTSENSOR_USB_COMMS();
+			break;
+		}
+
+	}
+
 }

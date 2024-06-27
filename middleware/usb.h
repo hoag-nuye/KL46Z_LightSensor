@@ -19,4 +19,5 @@ typedef enum{
 //================ FOCUSED ================/
 void USB_Init(USB_Mode_t usbMode);
 void USB_SEND_DATA(char* data);
+void USB_Disconnect();
 #endif

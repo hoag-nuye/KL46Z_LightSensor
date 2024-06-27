@@ -22,6 +22,11 @@ void USB_Init(USB_Mode_t usbMode){
 	}
 };
 
+//disconnect
+void USB_Disconnect(){
+	UART0_TRANSMIT_Disable();
+}
+
 void USB_SEND_DATA(char* data){
 	UART0_TRANSMIT_Enable();
 	uint8_t idx = 0;

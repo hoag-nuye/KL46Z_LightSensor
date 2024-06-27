@@ -5,7 +5,7 @@
  * Generated linker script file for MKL46Z256xxx4
  * Created from linkscript.ldt by FMCreateLinkLibraries
  * Using Freemarker v2.3.30
- * MCUXpresso IDE v11.9.1 [Build 2170] [2024-04-19] on Jun 27, 2024, 11:11:41 PM
+ * MCUXpresso IDE v11.9.1 [Build 2170] [2024-04-19] on Jun 28, 2024, 2:05:53 AM
  */
 
 INCLUDE "MKL46Z4_LightSensor_Debug_library.ld"
