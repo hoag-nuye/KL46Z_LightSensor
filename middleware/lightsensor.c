@@ -59,8 +59,11 @@ static void Config_PTE22_Pin(){
 
 void ADC0_IRQHandler(){
 	//read value
+	if (PIT->CHANNEL[0].TFLG & PIT_TFLG_TIF_MASK) {
+		PIT->CHANNEL[0].TFLG = PIT_TFLG_TIF_MASK; // Clear interrupt flag PIT
+	}
+	uint16_t valueADC = ADC0->R[ADC_SC1A];
 	//return to call back function
-	uint16_t valueADC = ADC_GetData16bit(ADC_SC1A);
 	handle_LightSensorValue(valueADC);
 }
 //================ FOCUSED ================/
@@ -73,7 +76,6 @@ void LIGHTSENSOR_Init(LIGHTSENSOR_Name_t name){
 void LIGHTSENSOR_TurnOn(){
 	switch (triggerADCMode){
 	case HARDWARE:
-		Pit_Timer_Reload(PIT_TIMER0, 100);
 		Pit_Timer_Start(PIT_TIMER0);
 		break;
 	case SOFTWARE:

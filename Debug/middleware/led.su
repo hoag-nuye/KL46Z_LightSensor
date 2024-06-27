@@ -9,8 +9,8 @@
 ../middleware/led.c:100:13:Clear_PTD5_Pin	8	static
 ../middleware/led.c:103:13:Clear_PTE29_Pin	8	static
 ../middleware/led.c:109:13:Enable_PTE29_LighSNS_Pin	24	static
-../middleware/led.c:123:6:LED_Init	16	static
-../middleware/led.c:138:6:Toggle_LED	16	static
-../middleware/led.c:152:6:TurnOff_LED	16	static
-../middleware/led.c:164:6:TurnOn_LED	16	static
-../middleware/led.c:178:6:Flash_LED_Timer	32	static
+../middleware/led.c:124:6:LED_Init	16	static
+../middleware/led.c:139:6:Toggle_LED	16	static
+../middleware/led.c:153:6:TurnOff_LED	16	static
+../middleware/led.c:165:6:TurnOn_LED	16	static
+../middleware/led.c:179:6:Flash_LED_Timer	32	static

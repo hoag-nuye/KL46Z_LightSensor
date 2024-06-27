@@ -31,8 +31,8 @@ static void Channel_Mode_Config(TPM_Type* tpm, uint8_t channel,TPM_ChannelMode_t
 		{
 		}
 
-		//SET UP MSnB:MSnA = [1:0] ; ELSnB:ELSnA = [1:0]
-		tpm->CONTROLS[channel].CnSC |=  TPM_CnSC_MSB_MASK | TPM_CnSC_ELSB_MASK;
+		//SET UP MSnB:MSnA = [1:0] ; ELSnB:ELSnA = [0:1]
+		tpm->CONTROLS[channel].CnSC |=  TPM_CnSC_MSB_MASK | TPM_CnSC_ELSA_MASK;
 
 
 		/* Wait till mode change is acknowledged */
@@ -79,6 +79,5 @@ void TPM_PWM_SetCOUNTERValue(TPM_Type* tpm, uint8_t channel, uint16_t ratioOfDut
 
 	//Calculate count value by BUS clock and ratio Of Duty Cycle with Period
 	uint16_t valCounter = (((uint16_t)tpm->MOD)+1)*ratioOfDuty/100;
-	tpm->CONTROLS[channel].CnV
-	= (tpm->CONTROLS[channel].CnV & (~TPM_CnV_VAL_MASK)) | TPM_CnV_VAL(valCounter-1);
+	tpm->CONTROLS[channel].CnV = (tpm->CONTROLS[channel].CnV & (~TPM_CnV_VAL_MASK)) | TPM_CnV_VAL(valCounter-1);
 };

@@ -41,6 +41,4 @@ void ADC_Softwarwe_Start(ADC_Input_t input, ADC_SC1n_t inputTrigger){
 };
 
 //
-uint16_t ADC_GetData16bit(ADC_SC1n_t sc1Name){
-	return (uint16_t)(ADC0->R[sc1Name]);
-};
+

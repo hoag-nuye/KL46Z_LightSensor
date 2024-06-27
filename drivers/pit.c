@@ -10,7 +10,7 @@ static uint32_t timeToReload(uint16_t timeMs){
 	uint32_t reloadValue;
 	//In Block diagram of the PIT, so the clock powering of PIT from bus
 	uint32_t Pit_clock = GetBusClock();
-	reloadValue = (uint32_t)timeMs * Pit_clock / 1000;
+	reloadValue = (uint32_t)timeMs * (Pit_clock / 1000);
 	return reloadValue;
 }
 //================ FOCUSED ================/

@@ -114,6 +114,7 @@ static void Enable_PTE29_LighSNS_Pin(){
 
 	//TRANSMIT DATA from LIGH_SENSOR to PWM
 	TPM_PWM_SetCOUNTERValue(TPM0, 2, ratio);//50%
+	TPM_PWM_Enable(TPM0);
 
 }
 
