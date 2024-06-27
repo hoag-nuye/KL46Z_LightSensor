@@ -72,7 +72,6 @@ typedef struct
 	ADC_DifMode_t mode;
 	ADC_Input_t input;
 }ADC_Config_Type;
-typedef void (*ADC_Handle_t)(uint16_t);
 //================ SUPPORT ================/
 
 //================ FOCUSED ================/
@@ -81,5 +80,4 @@ typedef void (*ADC_Handle_t)(uint16_t);
 void ADC_Config(ADC_Config_Type *ADC_Config);
 void ADC_Softwarwe_Start(ADC_Input_t input, ADC_SC1n_t inputTrigger);
 uint16_t ADC_GetData16bit(ADC_SC1n_t sc1Name);
-void ADC_Handdle_t
 #endif

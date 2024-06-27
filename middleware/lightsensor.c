@@ -8,6 +8,7 @@
 #include "adc.h"
 #include "pit.h"
 //================ DEFINED ================/
+static ADC_Trigger_t triggerADCMode;
 static void nullHandlLightSensor(uint32_t _){}
 Handle_LightSensor_t handle_LightSensorValue = nullHandlLightSensor;
 //================ SUPPORT ================/
@@ -36,6 +37,7 @@ static void Config_PTE22_Pin(){
 			.input = I_DP3,
 	};
 	ADC_Config(&ADC0_Config);
+	triggerADCMode = ADC0_Config.trigger;
 	//ADC interrupt NVIC
 	NVIC_EnableIRQn(IR_ADC0);
 	//Clock PIT
@@ -44,12 +46,16 @@ static void Config_PTE22_Pin(){
 	Pit_Config_Type Pit_Config_v = {
 			.module = PIT_MODULE_ENABLE,
 	};
-	Pit_Config(&Pit_Config_v);
-	//Set reload
-	Pit_Timer_Reload(PIT_TIMER0, 10);//10ms trigger time 1;
-	//Module to Module
-	M2M_Interconnects(M2M_PIT2ADC);
+	if(triggerADCMode == HARDWARE){
+		Pit_Config(&Pit_Config_v);
+		//Set reload
+		Pit_Timer_Reload(PIT_TIMER0, 10);//10ms trigger time 1;
+		//Module to Module
+		M2M_Interconnects(M2M_PIT2ADC);
+	}
 }
+
+
 
 void ADC0_IRQHandler(){
 	//read value
@@ -65,10 +71,33 @@ void LIGHTSENSOR_Init(LIGHTSENSOR_Name_t name){
 		}
 };
 void LIGHTSENSOR_TurnOn(){
-	Pit_Timer_Reload(PIT_TIMER0, 10);
-	Pit_Timer_Start(PIT_TIMER0);
+	switch (triggerADCMode){
+	case HARDWARE:
+		Pit_Timer_Reload(PIT_TIMER0, 100);
+		Pit_Timer_Start(PIT_TIMER0);
+		break;
+	case SOFTWARE:
+		break;
+	}
+
 };
+
 void LIGHTSENSOR_TurnOff();
 void LIGHTSENSOR_Read(Handle_LightSensor_t _handle_LightSensorValue){
 	handle_LightSensorValue = _handle_LightSensorValue;
+};
+
+//CONVERT ADC VALUE TO VOTAGE
+float LIGHTSENSOR_Read2Voltage(uint16_t adcValue){
+	// ADC reference voltage
+	const float VREF = 3.3;
+	// ADC resolution (16-bit)
+	const uint32_t ADC_RESOLUTION = 65535;
+
+	// Calculate voltage value
+	float voltage = (adcValue / (float)ADC_RESOLUTION) * VREF;
+	return voltage;
+};
+float LIGHTSENSOR_Read2Lux(uint16_t adcValue){
+	// LUX = GAIN * voltage + OFFSET
 };

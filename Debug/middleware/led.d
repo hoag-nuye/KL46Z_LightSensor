@@ -10,7 +10,9 @@ middleware/led.o middleware/led.d: ../middleware/led.c \
  F:\KL46Project\MKL46Z4_DriverMCU\workspace\MKL46Z4_LightSensor\drivers/gpio.h \
  F:\KL46Project\MKL46Z4_DriverMCU\workspace\MKL46Z4_LightSensor\drivers/clock.h \
  F:\KL46Project\MKL46Z4_DriverMCU\workspace\MKL46Z4_LightSensor\drivers/systick.h \
- F:\KL46Project\MKL46Z4_DriverMCU\workspace\MKL46Z4_LightSensor\drivers/tpm.h
+ F:\KL46Project\MKL46Z4_DriverMCU\workspace\MKL46Z4_LightSensor\drivers/tpm.h \
+ F:\KL46Project\MKL46Z4_DriverMCU\workspace\MKL46Z4_LightSensor\drivers/adc.h \
+ ../middleware/lightsensor.h
 F:\KL46Project\MKL46Z4_DriverMCU\workspace\MKL46Z4_LightSensor\CMSIS/MKL46Z4.h:
 F:\KL46Project\MKL46Z4_DriverMCU\workspace\MKL46Z4_LightSensor\CMSIS/core_cm0plus.h:
 F:\KL46Project\MKL46Z4_DriverMCU\workspace\MKL46Z4_LightSensor\CMSIS/cmsis_version.h:
@@ -23,3 +25,5 @@ F:\KL46Project\MKL46Z4_DriverMCU\workspace\MKL46Z4_LightSensor\drivers/gpio.h:
 F:\KL46Project\MKL46Z4_DriverMCU\workspace\MKL46Z4_LightSensor\drivers/clock.h:
 F:\KL46Project\MKL46Z4_DriverMCU\workspace\MKL46Z4_LightSensor\drivers/systick.h:
 F:\KL46Project\MKL46Z4_DriverMCU\workspace\MKL46Z4_LightSensor\drivers/tpm.h:
+F:\KL46Project\MKL46Z4_DriverMCU\workspace\MKL46Z4_LightSensor\drivers/adc.h:
+../middleware/lightsensor.h:

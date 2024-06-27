@@ -7,7 +7,13 @@
 #include "systick.h"
 #include "tpm.h"
 #include "adc.h"
+#include "lightsensor.h"
 //================ DEFINED ================/
+static uint16_t dataLightSensor;
+//HANDLE LIGHSENSOR
+static void GetDataLightSensor(uint16_t data){
+	dataLightSensor = data;
+}
 //================ SUPPORT ================/
 //CONFIG LED PIN
 static void Config_PTD5_Pin(){
@@ -67,7 +73,11 @@ static void Config_PTE29_PWM_Pin(){
 			.channelMode = TPM_EPWM_High_MODE,
 	};
 	TPM_PWM_Config(&TPM0_PWM_Config);
+	//frequencies lower than 100 Hz may cause visible flicker.
+	TPM_PWM_SetMODValue(TPM0, 2, 1000);//1000HZ
 
+	//GET DATA from LIGH_SENSOR
+	LIGHTSENSOR_Read(GetDataLightSensor);
 }
 
 //TOGGLE LED
@@ -94,20 +104,20 @@ static void Clear_PTE29_Pin(){
 	GPIO_ClearPin(GPIOE, 29);
 }
 
+
+//TURN ON LED2 WITH TAKING DATA FROM LIGHSENSOR
 static void Enable_PTE29_LighSNS_Pin(){
+	//CONVERT DATA LIGHTSENOR TO VOTAGE
+	float votageValue = LIGHTSENSOR_Read2Voltage(dataLightSensor);
 
-	//GET DATA from LIGH_SENSOR
+	uint8_t ratio = (votageValue / 3.3)*100;
 
-
-	//frequencies lower than 100 Hz may cause visible flicker.
-	TPM_PWM_SetMODValue(TPM0, 2, 10000);//1000HZ
 	//TRANSMIT DATA from LIGH_SENSOR to PWM
-	TPM_PWM_SetCOUNTERValue(TPM0, 2, 10);//50%
+	TPM_PWM_SetCOUNTERValue(TPM0, 2, ratio);//50%
 
-
-	//TPM0_CH2 enable
-	TPM_PWM_Enable(TPM0);
 }
+
+//CONVERT
 //================ FOCUSED ================/
 //LED Initial
 void LED_Init(LED_Name_t name){

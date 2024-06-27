@@ -24,5 +24,6 @@ void LIGHTSENSOR_Init(LIGHTSENSOR_Name_t name);
 void LIGHTSENSOR_TurnOn();
 void LIGHTSENSOR_TurnOff();
 void LIGHTSENSOR_Read(Handle_LightSensor_t handle_LightSensorValue );
-
+float LIGHTSENSOR_Read2Voltage(uint16_t adcValue);
+float LIGHTSENSOR_Read2Lux(uint16_t adcValue);
 #endif
