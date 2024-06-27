@@ -2,31 +2,22 @@
 #include "MKL46Z4.h"
 #include <stdint.h>
 //================ DEFINED ================/
-#ifndef __CLOCK_H_
-#define __CLOCK_H_
+#ifndef __UART0_H_
+#define __UART0_H_
 
-#define CLK_TPM0_IR 1000000U
-#define CLK_UART0_IR 1000000U
+
 //------------- Enum -----------//
 //Define value of fields
-
-typedef enum{
-	 CLK_PORTA,
-	 CLK_PORTB,
-	 CLK_PORTC,
-	 CLK_PORTD,
-	 CLK_PORTE,
-	 CLK_ADC0,
-	 CLK_PIT,
-	 CLK_TPM0_MCGIRCLK,
-	 CLK_UART0_MCGIRCLK,
-}Perhipheral_Name_t;
 //------------- Struct -----------//
-
+typedef struct{
+	uint16_t baudrate;
+	uint8_t samplingRatio;
+}UART0_Config_t;
 //================ SUPPORT ================/
 
 //================ FOCUSED ================/
-
+void UART0_Config(UART0_Config_t* uart0_config);
+void UART0_TRANSMIT_Enable();
+void UART0_TRANSMIT_Data(char data);
 // Configuration control port
-void Clock_Enable(Perhipheral_Name_t name);
 #endif

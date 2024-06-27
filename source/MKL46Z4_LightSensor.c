@@ -22,5 +22,6 @@
 
 void main() {
 //	BUTTON_LED_Toggle();
-	LIGHTSENSOR_ACTIVE_TEST();
+//	LIGHTSENSOR_ACTIVE_TEST();
+//	USB_COMMS();
 }

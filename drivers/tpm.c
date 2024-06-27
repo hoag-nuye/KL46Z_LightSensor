@@ -69,7 +69,7 @@ void TPM_PWM_Enable(TPM_Type* tpm){
 };
 void TPM_PWM_SetMODValue(TPM_Type* tpm, uint8_t channel, uint16_t freqOfPeriod){
 	//Calculate IR CLOCK
-	uint32_t tpm_clock = CLK_TPM0;
+	uint32_t tpm_clock = CLK_TPM0_IR;
 	//Reset Count value
 	tpm->CNT &= ~TPM_CNT_COUNT_MASK;
 	//Calculate modulo value by BUS clock and Period

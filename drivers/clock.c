@@ -43,7 +43,23 @@ void Clock_Enable(Perhipheral_Name_t name){
 		MCG->SC |= MCG_SC_FCRDIV(0b010);
 		//CHOOSE IR High CLOCK
 		MCG->C2 &= ~MCG_C2_IRCS_MASK;
-		MCG->C2 |= ~MCG_C2_IRCS(1);
+		MCG->C2 |= MCG_C2_IRCS(1);
+		break;
+	case CLK_UART0_MCGIRCLK:
+		//IRCLKEN = Active
+		MCG->C1 &= ~MCG_C1_IRCLKEN_MASK;
+		MCG->C1 |= MCG_C1_IRCLKEN(1);
+
+		SIM->SCGC4 |= SIM_SCGC4_UART0(1);
+		//UART0SRC = MCGIRCLK
+		SIM->SOPT2 &= ~SIM_SOPT2_UART0SRC_MASK;
+		SIM->SOPT2 |= SIM_SOPT2_UART0SRC(0b11);
+		//FCRDIV = 4
+		MCG->SC &= ~MCG_SC_FCRDIV_MASK;
+		MCG->SC |= MCG_SC_FCRDIV(0b010);
+		//CHOOSE IR High CLOCK
+		MCG->C2 &= ~MCG_C2_IRCS_MASK;
+		MCG->C2 |= MCG_C2_IRCS(1);
 		break;
 	}
 };

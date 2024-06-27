@@ -1,3 +1,4 @@
 ../interface/interface.c:8:13:handleButton	16	static
 ../interface/interface.c:21:6:BUTTON_LED_Toggle	8	static
 ../interface/interface.c:46:6:LIGHTSENSOR_ACTIVE_TEST	8	static
+../interface/interface.c:57:6:USB_COMMS	32	static

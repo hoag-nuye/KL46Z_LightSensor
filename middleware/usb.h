@@ -1,32 +1,22 @@
 //================ INCLUDE ================/
+#include "MKL46Z4.h"
 #include <stdint.h>
-#include "led.h"
-#include "button.h"
-#include "lightsensor.h"
-#include "usb.h"
+
 //================ DEFINED ================/
-#ifndef __INTERFACE_H_
-#define __INTERFACE_H_
+#ifndef __USB_H_
+#define __USB_H_
 
 
 //------------- Enum -----------//
 //Define value of fields
-
 typedef enum{
-	DO_NOTHING,
-	TOGGLE_LED,
-	FLASHING_LED,
-}State_Machine_t;
-
-typedef enum{
-	_BUTTON_LED_Flashing,
-}State_Program_t;
+	USB_MODE_UART
+}USB_Mode_t;
 //------------- Struct -----------//
 
 //================ SUPPORT ================/
 
 //================ FOCUSED ================/
-void BUTTON_LED_Toggle();
-void LIGHTSENSOR_ACTIVE_TEST();
-void USB_COMMS();
+void USB_Init(USB_Mode_t usbMode);
+void USB_SEND_DATA(char* data);
 #endif

@@ -6,17 +6,20 @@
 C_SRCS += \
 ../middleware/button.c \
 ../middleware/led.c \
-../middleware/lightsensor.c 
+../middleware/lightsensor.c \
+../middleware/usb.c 
 
 C_DEPS += \
 ./middleware/button.d \
 ./middleware/led.d \
-./middleware/lightsensor.d 
+./middleware/lightsensor.d \
+./middleware/usb.d 
 
 OBJS += \
 ./middleware/button.o \
 ./middleware/led.o \
-./middleware/lightsensor.o 
+./middleware/lightsensor.o \
+./middleware/usb.o 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -31,7 +34,7 @@ middleware/%.o: ../middleware/%.c middleware/subdir.mk
 clean: clean-middleware
 
 clean-middleware:
-	-$(RM) ./middleware/button.d ./middleware/button.o ./middleware/led.d ./middleware/led.o ./middleware/lightsensor.d ./middleware/lightsensor.o
+	-$(RM) ./middleware/button.d ./middleware/button.o ./middleware/led.d ./middleware/led.o ./middleware/lightsensor.d ./middleware/lightsensor.o ./middleware/usb.d ./middleware/usb.o
 
 .PHONY: clean-middleware
 

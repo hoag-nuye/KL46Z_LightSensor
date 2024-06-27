@@ -53,3 +53,9 @@ void LIGHTSENSOR_ACTIVE_TEST(){
 
 		}
 };
+
+void USB_COMMS(){
+	char data[] = "Hello World";
+	USB_Init(USB_MODE_UART);
+	USB_SEND_DATA(data);
+}

@@ -6,6 +6,7 @@
 #include "clock.h"
 #include "systick.h"
 #include "tpm.h"
+#include "adc.h"
 //================ DEFINED ================/
 //================ SUPPORT ================/
 //CONFIG LED PIN
@@ -101,7 +102,7 @@ static void Enable_PTE29_LighSNS_Pin(){
 	//frequencies lower than 100 Hz may cause visible flicker.
 	TPM_PWM_SetMODValue(TPM0, 2, 10000);//1000HZ
 	//TRANSMIT DATA from LIGH_SENSOR to PWM
-	TPM_PWM_SetCOUNTERValue(TPM0, 2, 150);//50%
+	TPM_PWM_SetCOUNTERValue(TPM0, 2, 10);//50%
 
 
 	//TPM0_CH2 enable

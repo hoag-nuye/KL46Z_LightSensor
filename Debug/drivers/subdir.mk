@@ -13,7 +13,8 @@ C_SRCS += \
 ../drivers/pit.c \
 ../drivers/port.c \
 ../drivers/systick.c \
-../drivers/tpm.c 
+../drivers/tpm.c \
+../drivers/uart0.c 
 
 C_DEPS += \
 ./drivers/adc.d \
@@ -25,7 +26,8 @@ C_DEPS += \
 ./drivers/pit.d \
 ./drivers/port.d \
 ./drivers/systick.d \
-./drivers/tpm.d 
+./drivers/tpm.d \
+./drivers/uart0.d 
 
 OBJS += \
 ./drivers/adc.o \
@@ -37,7 +39,8 @@ OBJS += \
 ./drivers/pit.o \
 ./drivers/port.o \
 ./drivers/systick.o \
-./drivers/tpm.o 
+./drivers/tpm.o \
+./drivers/uart0.o 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -52,7 +55,7 @@ drivers/%.o: ../drivers/%.c drivers/subdir.mk
 clean: clean-drivers
 
 clean-drivers:
-	-$(RM) ./drivers/adc.d ./drivers/adc.o ./drivers/clock.d ./drivers/clock.o ./drivers/driverLib.d ./drivers/driverLib.o ./drivers/gpio.d ./drivers/gpio.o ./drivers/mdl2mdl.d ./drivers/mdl2mdl.o ./drivers/nvic.d ./drivers/nvic.o ./drivers/pit.d ./drivers/pit.o ./drivers/port.d ./drivers/port.o ./drivers/systick.d ./drivers/systick.o ./drivers/tpm.d ./drivers/tpm.o
+	-$(RM) ./drivers/adc.d ./drivers/adc.o ./drivers/clock.d ./drivers/clock.o ./drivers/driverLib.d ./drivers/driverLib.o ./drivers/gpio.d ./drivers/gpio.o ./drivers/mdl2mdl.d ./drivers/mdl2mdl.o ./drivers/nvic.d ./drivers/nvic.o ./drivers/pit.d ./drivers/pit.o ./drivers/port.d ./drivers/port.o ./drivers/systick.d ./drivers/systick.o ./drivers/tpm.d ./drivers/tpm.o ./drivers/uart0.d ./drivers/uart0.o
 
 .PHONY: clean-drivers
 
