@@ -4,7 +4,7 @@
 //================ DEFINED ================/
 #ifndef __ADC_H_
 #define __ADC_H_
-
+#define ADC_RESOLUTION 65535
 
 //------------- Enum -----------//
 //Define value of fields

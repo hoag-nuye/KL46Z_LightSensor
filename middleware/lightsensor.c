@@ -94,7 +94,6 @@ float LIGHTSENSOR_Read2Voltage(uint16_t adcValue){
 	// ADC reference voltage
 	const float VREF = 3.3;
 	// ADC resolution (16-bit)
-	const uint32_t ADC_RESOLUTION = 65535;
 
 	// Calculate voltage value
 	float voltage = (adcValue / (float)ADC_RESOLUTION) * VREF;
@@ -102,4 +101,12 @@ float LIGHTSENSOR_Read2Voltage(uint16_t adcValue){
 };
 float LIGHTSENSOR_Read2Lux(uint16_t adcValue){
 	// LUX = GAIN * voltage + OFFSET
+	// LUX = A*Current(I) + B
+	//Link explain
+	// https://www.canva.com/design/DAGIwkwx_7o/92yCpYLy3BPyWVVuTZeJFg/edit?utm_content=DAGIwkwx_7o&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+	float result;
+
+	result = ((((float)adcValue*3.3)/ADC_RESOLUTION - 3.3)/10000)*(180.0/37.0) + 1000.0/37.0;
+
+	return result;
 };
